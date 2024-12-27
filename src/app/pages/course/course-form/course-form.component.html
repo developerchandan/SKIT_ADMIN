@@ -1,0 +1,247 @@
+
+<div class="content-body">
+    <div class="container-fluid">
+<p-toast position="bottom-right" [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'" [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+
+<p-confirmDialog></p-confirmDialog>
+<section class="page-content course-sec">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="widget-setcount">
+            <p-toolbar>
+              <div class="p-toolbar-group-left">
+                <h5>Add New Course</h5>            
+              </div>        
+            </p-toolbar>
+          </div>
+
+          <p-steps [model]="items" [(activeIndex)]="currentStep"></p-steps>
+
+          <div *ngIf="currentStep === 0">
+            <!-- Content for Step 1: Basic Information -->
+            <div class="widget-set">
+
+              <div class="widget-content multistep-form">
+                <div class="add-course-info">
+                  <div class="add-course-inner-header">
+                  </div>
+                  <div class="add-course-form">
+                    <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+                      <div class="form-group">
+                        <label class="add-course-label">Course Title</label>
+                        <input type="text" class="form-control" placeholder="Course Title" formControlName="title">
+                        <div *ngIf="courseForm.get('title')?.hasError('consecutiveSpaces') && courseForm.get('title')?.touched"
+                        class="text-danger">
+                        Consecutive spaces are not allowed in Course Title.
+                      </div>
+                      
+                      </div>
+                      <div class="p-fluid p-formgrid p-grid">
+                        <div class="p-field p-col">
+                          <div class="form-group">
+                            <label class="add-course-label">Courses Category</label>
+                            <p-dropdown [options]="getCategoryList" optionLabel="name" optionValue="_id"
+                              (onChange)="onCategoryChange($event)" placeholder="Select a category" formControlName="category"></p-dropdown>
+                            <div *ngIf="courseForm.get('category')?.invalid && courseForm.get('category')?.touched" class="text-danger">
+                              Category is required.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="p-field p-col">
+                          <div class="form-group">
+                            <label class="add-course-label">Courses Sub Category</label>
+                            <p-dropdown [options]="getSubCategoryList" optionLabel="name" optionValue="_id"
+                              [disabled]="!selectedCategory" placeholder="Select a subcategory" formControlName="subCategory"></p-dropdown>
+                            <div
+                              *ngIf="courseForm.get('subCategory')?.invalid && courseForm.get('subCategory')?.touched"
+                              class="text-danger">
+                              Subcategory is required.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="p-fluid p-formgrid p-grid">
+                        <div class="p-field p-col">
+                          <div class="form-group">
+                            <label class="add-course-label">Courses Level</label>
+                            <p-dropdown [options]="courseLevel" optionLabel="name" optionValue="_id"
+                              placeholder="Select a course Level" formControlName="level"></p-dropdown>
+                            <div *ngIf="courseForm.get('level')?.invalid && courseForm.get('level')?.touched"
+                              class="text-danger">
+                              Level is required.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="p-fluid p-formgrid p-grid">
+                        <div class="p-field p-col">
+                            <div class="form-group">
+                                <label class="add-course-label">Courses Duration</label>
+                                <p-dropdown [options]="courseDuration" optionLabel="durationInMonths" optionValue="_id"
+                                    placeholder="Select a course duration" formControlName="courseDuration"></p-dropdown>
+                                <div *ngIf="courseForm.get('courseDuration')?.invalid && courseForm.get('courseDuration')?.touched"
+                                    class="text-danger">
+                                    courseDuration is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="add-course-label">Course cover image</label>
+                      <div class="relative-form">
+                        <label class="relative-file-upload">
+                          Upload File
+                          <input type="file" (change)="onFileSelected($event)" formControlName="coverImage">
+                        </label>
+                        <span *ngIf="selectedImage">
+                          <img [src]="selectedImage" alt="Course Cover Image" class="selected-image">
+                          <button type="button" class="delete-image-button" (click)="deleteImage(selectedImage)">Delete Image</button>
+                        </span>
+                      </div>
+                    </div>
+                    
+                      <div class="form-group">
+                        <label class="add-course-label">Subtitle</label>
+                        <textarea name="" id="" cols="88" rows="5"class="form-control"formControlName="subtitle"placeholder="Enter Your Subtitle"></textarea>
+                        <!-- <input type="text" class="form-control" placeholder="Subtitle" formControlName="subtitle"> -->
+                        <div *ngIf="courseForm.get('subtitle')?.invalid && courseForm.get('subtitle')?.touched"
+                          class="text-danger">
+                          Subtitle is required.
+                        </div>
+                      </div>
+                      <div class="p-fluid p-formgrid p-grid">
+                        <div class="p-field p-col">
+                          <div class="form-group ">
+                            <label class="add-course-label">Tags</label>
+                            <p-chips formControlName="tags" placeholder="Enter tags (ex:- #HTML #CSS #JS)"></p-chips>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group mb-0">
+                        <label class="add-course-label">Price</label>
+                        <input type="number" class="form-control" formControlName="price" placeholder="10.00">
+                      </div>
+
+                      <div class="form-group mb-0">
+                        <label class="add-course-label">Course Description</label>
+                        <ckeditor [editor]="Editor" formControlName="description"></ckeditor>
+                        <div *ngIf="courseForm.get('description')?.invalid && courseForm.get('description')?.touched"
+                          class="text-danger">
+                          Description is required.
+                        </div>
+                      </div>
+
+                      <div *ngIf="isAutoSaving" class="text-success">
+                        Draft saved automatically.
+                      </div>
+
+                    </form>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="widget-btn">
+              <p-button label="Save Draft" icon="pi pi-angle-double-right"(click)="saveDraft()"
+              styleClass="p-button-sm"></p-button>
+
+              <p-button label="Next" icon="pi pi-angle-double-right" (click)="nextStep()"
+                styleClass="p-button-sm"></p-button>
+
+            </div>
+          </div>
+
+          <div *ngIf="currentStep === 1">
+            <form [formGroup]="curriculumForm" class="curriculum-form" (ngSubmit)="onSubmit()">
+              <div class="add-course-info">
+
+                <p-card>
+                  <p-accordion>
+                  <div class="curriculum-grid" formArrayName="sections">
+                    <div *ngFor="let section of sections.controls; let i = index" [formGroupName]="i"
+                      class="curriculum-section">
+                      <p-accordionTab header="Session {{ i + 1 }} ({{ getSectionTitle(section) }}) ">
+                      <div class="curriculum-head">
+                        <p>New Section: {{ i + 1 }}: {{ getSectionTitle(section) }}</p>
+                        <div class="form-group">
+                          <input type="text" pInputText formControlName="title" placeholder="Title"style="height: 33px; border: 1px solid; border-radius: 0px;">
+                        </div>                      
+                      </div>
+
+                      <div class="curriculum-info">
+                        <p-accordion>
+                        
+                        <div formArrayName="lessons">
+                          <div class="lecture" *ngFor="let lecture of getLectures(section).controls; let j = index"
+                            [formGroupName]="j" class="curriculum-lecture">
+                            <p-accordionTab header="Lesson  {{ j + 1 }}">
+                            <div class="lecture-item clearfix">
+                              <div class="form-group">
+                                <input type="text" pInputText formControlName="lectureTitle"
+                                  placeholder="Lecture Title" style="height: 33px; border: 1px solid; border-radius: 0px;">
+                              </div>
+                              <div class="content-type-selection">
+                                <label>Select Content Type:</label>
+                                <select formControlName="contentType" class="form-group">
+                                  <option value="video">Video</option>
+                                  <option value="pdf">PDF</option>
+                                  <option value="mcq">MCQ</option>
+                                </select>
+                              </div>
+
+                              <p-button label="Remove lession" icon="pi pi-trash" (click)="removeLecture(section, j)"
+                              styleClass="p-button-outlined p-button-info p-button-sm"pTooltip="Remove lession"tooltipPosition="bottom"></p-button>
+                            </div>
+                          </p-accordionTab>
+
+                          </div>
+                        </div>
+                     
+                        </p-accordion>
+                         <p-button label="Add Lession" icon="pi pi-plus" (click)="addLecture(section)"
+                          styleClass="p-button-sm"pTooltip="Add Lession"tooltipPosition="bottom"></p-button>
+                          
+                        <p-button icon="pi pi-trash" (click)="removeSection(i)"
+                          styleClass="p-button-sm p-button-danger"pTooltip="Remove Section"tooltipPosition="bottom"></p-button>
+                      </div>
+                      
+                   </p-accordionTab> 
+                  </div>
+                    <div class="p-toolbar-group-left">
+                      <p-button label="Add Section" icon="pi pi-plus" (click)="addSection()"
+                        styleClass="p-button-secondary p-button-sm" class="mr-2"></p-button>
+                    </div>
+                  </div>
+                  </p-accordion>
+                </p-card>
+
+
+              </div>
+            </form>
+            <div class="widget-btn">
+              <p-button label="Previous" icon="pi pi-angle-double-left" (click)="previousStep()"
+                styleClass="p-button-sm"></p-button>
+
+              <p-button label="Save Draft" icon="pi pi-angle-double-right"(click)="saveDraft()"
+              styleClass="p-button-sm"></p-button>
+          
+              <p-button label="Save Course" type="submit" icon="pi pi-check" (click)="onSubmit()"
+                styleClass="p-button-sm"></p-button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+</div>

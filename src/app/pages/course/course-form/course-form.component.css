@@ -1,0 +1,556 @@
+/* Add overall styling to the form */
+/* .curriculum-form {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+} */
+
+.curriculum-grid {
+    padding: 10px;
+    background: transparent !important;
+    /* border-radius: 10px; */
+  }
+  .widget-setcount {
+    border-bottom: 0px !important;
+  }
+  /* Style the section header */
+  .add-course-inner-header h4 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Adjust button positions */
+  .curriculum-head {
+    margin-bottom: 10px;
+    border: 1px solid #64748B;
+    padding: 20px;
+  }
+  
+  .curriculum-head p {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  :host /deep/ .p-toolbar {
+    margin-bottom: 1em !important;
+  }
+  
+  
+  
+  /* Style the buttons */
+  .btn {
+    padding: 8px 16px;
+  }
+  
+  :host /deep/.p-button.p-button-sm {
+    margin-right: 1em;
+  }
+  
+  /* :host /deep/.p-inputtext{
+    border-radius: 0px !important;
+    height:40px !important;
+  
+  } */
+  :host /deep/ .p-dropdown-label {
+    display: inline-table !important;
+  }
+  
+  input.form-control {
+    height: 50px !important;
+    /* border-radius: 0px !important; */
+  }
+  
+  :host /deep/ span.p-dropdown-label.p-inputtext.p-placeholder.ng-star-inserted {
+    /* padding-bottom: 39px; */
+    border-radius: 0px !important;
+  }
+  .btn-color{
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #007bff;
+    border-radius: 6px;
+  }
+  /* :host /deep/.p-chips-input-token input{
+    height: 50px !important;
+  
+  } */
+  
+  /* .add-course-section .btn {
+    background-color: #007bff;
+  } */
+  
+  /* .add-course-form .btn {
+    background-color: #28a745;
+  } */
+  
+  /* .remove-section-btn {
+    background-color: #dc3545;
+  }
+  
+  .remove-lecture-btn {
+    background-color: #dc3545;
+  } */
+  
+  .btn:focus {
+    outline: none;
+  }
+  
+  /* Style the lecture input field */
+  .lecture-item .form-group {
+    margin-bottom: 10px;
+  }
+  
+  /* Style the "Add Video" and "Add PDF" labels */
+  /* .file-upload label {
+    cursor: pointer;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+    transition: background-color 0.3s ease;
+  } */
+  
+  .file-upload label:hover {
+    background-color: #007bff;
+  }
+  
+  /* Style the file input */
+  /* .file-upload input[type="file"] {
+    display: none;
+  } */
+  
+  /* Style the widget buttons */
+  .widget-btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  /* Style the "Previous" and "Continue" buttons */
+  .prev_btn {
+    background-color: #333;
+  }
+  
+  .next_btn {
+    background-color: #007bff;
+  }
+  
+  /* Add some common styles for links (you can modify this based on your design) */
+  a {
+    text-decoration: none;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    display: inline-block;
+    width: 120px;
+    transition: background-color 0.3s ease;
+  }
+  
+  a:hover {
+    opacity: 0.8;
+    text-decoration: none;
+  }
+  
+  /* Custom styling for the tag input */
+  .custom-tag-input {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .custom-tag-input:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  .custom-tag-input.tag-input-item {
+    /* Styles for each individual tag item */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    margin: 2px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .custom-tag-input.tag-input-item:hover {
+    /* Styles for the hovered tag item */
+    background-color: #0056b3;
+  }
+  
+  /* Additional styling for the Curriculum Form */
+  
+  /* Add some padding and margin to create spacing */
+  .curriculum-form {
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  /* Style the lecture item */
+  .lecture-item {
+    margin-bottom: 15px;
+  }
+  
+  /* Style the lecture title input */
+  .lecture-item .form-group input {
+    width: 100%;
+  }
+  
+  /* Style the file upload button */
+  .file-upload {
+    margin-right: 5px;
+    display: initial !important;
+  
+  }
+  
+  /* .p-button {
+    padding: 7px 10px;
+  } */
+  
+  
+  /* Style the progress bar for video and PDF uploads */
+  .progress-bar {
+    background-color: #f0f0f0;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .progress {
+    height: 100%;
+    background-color: #007bff;
+    border-radius: 4px;
+  }
+  
+  /* Apply some styles to the table */
+  table.table {
+    margin-top: 10px;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table.table th,
+  table.table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  
+  /* Apply alternate background color to table rows */
+  table.table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Apply some spacing between lectures */
+  .curriculum-lecture {
+    margin-bottom: 15px;
+  }
+  
+  /* Style the buttons in the widget-btn class */
+  .widget-btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .widget-btn button {
+    margin-left: 10px;
+  }
+  
+  /* Add a border to the lecture items */
+  .curriculum-lecture {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 0px !important;
+  }
+  
+  /* Add some spacing to the curriculum section */
+  .curriculum-section {
+    margin-bottom: 15px;
+  }
+  
+  /* Style the section title input */
+  .curriculum-head .form-group input {
+    width: 100%;
+  }
+  
+  /* Style the table headers */
+  table.table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  /* Style the "delete" buttons in the table */
+  table.table td:last-child {
+    cursor: pointer;
+    color: #e74c3c;
+    text-align: center;
+  }
+  
+  table.table td:last-child:hover {
+    text-decoration: underline;
+  }
+  
+  /* Add style classes for progress bars */
+  .success-bar ::ng-deep .p-progress-bar-value {
+    background-color: green;
+  }
+  
+  .upload-bar ::ng-deep .p-progress-bar-value {
+    background-color: #007bff;
+  }
+  :host ::ng-deep .ck-editor__editable_inline {
+    min-height: 350px !important;
+  }
+  .file-upload.upload_btn {
+    float: left;
+    padding-top: 10px;
+    
+  }
+  
+  .removebtn {
+    float: right;
+  }
+  
+  /* Apply a specific font family and make text italic for all form controls */
+  .form-control {
+    font-family: "Your-Desired-Font-Family", sans-serif; /* Replace "Your-Desired-Font-Family" with the actual font family you want to use */
+    font-style: italic;
+  }
+  
+  /* Additional styling for specific input types */
+  input[type="text"],
+  input[type="password"],
+  textarea {
+    font-family: "Your-Desired-Font-Family", sans-serif;
+    font-style: italic;
+  }
+  
+  .add-course-info .add-course-label {
+    font-weight: 600;
+    font-family: "Your-Desired-Font-Family", sans-serif;
+    font-style: italic;
+    /* color: #000; */
+  
+  }
+  
+  /* Your existing styles for PrimeNG components */
+  :host /deep/.p-speeddial-button.p-button.p-button-icon-only {
+    width: 10rem;
+    height: 2rem;
+    border: none;
+  }
+  
+  :host /deep/.p-button.p-button-icon-only.p-button-rounded {
+    border-radius: 2%;
+    height: 3rem;
+  }
+  
+  :host /deep/.p-button.p-button-icon-only {
+    width: 3rem;
+    padding: 0.75rem 0;
+  }
+  
+  :host /deep/.p-speeddial-opened .p-speeddial-rotate {
+    transform: rotate(0deg);
+  }
+  :host /deep/ .p-speeddial-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2%;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  /* Custom styles for the square button */
+  .custom-speed-dial-button {
+    width: 100px;
+    height: 100px;
+    background-color: #3B82F6;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 0; /* Square button, no border-radius */
+    cursor: pointer; /* Show pointer cursor on hover */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Add smooth transition */
+  }
+  
+  
+  
+  .custom-speed-dial-label {
+    margin-top: 10px; /* Adjust the margin as needed */
+  }
+  
+  .custom-speed-dial-button i {
+    font-size: 1.5rem;
+  }
+  
+  /* Styles for the content type selection dropdown */
+  .content-type-selection {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .content-type-selection label {
+    margin-right: 10px;
+  }
+  
+  .content-type-selection select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .content-type-selection select:hover {
+    border-color: #666;
+  }
+  
+  .content-type-selection select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  /* Styles for the options in the dropdown */
+  .content-type-selection select option {
+    font-size: 14px;
+    background-color: white;
+    color: #333;
+  }
+  
+  .success-message {
+    background-color: #ACD2CC !important; 
+    color: #fff !important; 
+  }
+  .hidden {
+    display: none;
+  }
+  
+  /* Style the container */
+.content-body {
+    background-color: #f5f5f5;
+    padding: 20px;
+  }
+  
+  .container-fluid {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+  }
+  
+  /* Style the card */
+  .card {
+    border: none;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  /* Style the form elements */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .add-course-label {
+    font-weight: bold;
+  }
+  
+  .form-control {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .selected-image {
+    max-width: 100px;
+    max-height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .delete-image-button {
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  /* Style the buttons */
+  .p-button {
+    margin-right: 10px;
+  }
+  
+  /* Style the steps */
+  .p-steps {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  /* Style the accordion */
+  .p-accordion {
+    border: none;
+  }
+  
+  .p-accordionTab {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 0;
+  }
+  
+  /* Style the progress bar */
+  .p-progressBar {
+    margin-top: 10px;
+  }
+  
+  /* Style the chips */
+  .p-chips {
+    width: 100%;
+  }
+  
+  /* Style the CKEditor */
+  .ck-editor__editable_inline {
+    min-height: 150px !important;
+  }
+  
+  /* Additional styling for specific elements */
+  /* Add your custom styles here */
+  
+  
+  
+  

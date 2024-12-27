@@ -1,0 +1,175 @@
+<p-confirmDialog></p-confirmDialog>
+<p-toast></p-toast>
+
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">   
+                    <!-- <h5 class="mb-0">Category Section</h5>              -->
+                    <div class="card-header">
+                      <div class="float-end"> 
+                      
+                        <button class="btn btn-outline-primary me-3"data-bs-toggle="modal" data-bs-target="#addCategoryModal">Add Category</button>                    
+                        <button class="btn btn-primary"data-bs-toggle="modal" data-bs-target="#addSubCategoryModal">Add Sub Category</button>
+                      </div>
+                        <div class="float-end">  
+                          <div class="input-group search-area mb-md-0 mb-3">
+                            <input type="text" class="form-control" placeholder="Search here...">
+                            <span class="input-group-text"><a href="javascript:void(0)">
+                                <svg width="15" height="15" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path
+                                    d="M17.5605 15.4395L13.7527 11.6317C14.5395 10.446 15 9.02625 15 7.5C15 3.3645 11.6355 0 7.5 0C3.3645 0 0 3.3645 0 7.5C0 11.6355 3.3645 15 7.5 15C9.02625 15 10.446 14.5395 11.6317 13.7527L15.4395 17.5605C16.0245 18.1462 16.9755 18.1462 17.5605 17.5605C18.1462 16.9747 18.1462 16.0252 17.5605 15.4395V15.4395ZM2.25 7.5C2.25 4.605 4.605 2.25 7.5 2.25C10.395 2.25 12.75 4.605 12.75 7.5C12.75 10.395 10.395 12.75 7.5 12.75C4.605 12.75 2.25 10.395 2.25 7.5V7.5Z"
+                                    fill="#01A3FF"></path>
+                                </svg>
+                              </a></span>
+                          </div>       
+                               </div>
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade show active" id="Preview" role="tabpanel" aria-labelledby="home-tab">
+                          <div class="card-body p-0">
+                              <div class="table-responsive">
+                                  <table class="table table-responsive-md">
+                                      <thead>
+                                          <tr>
+                                              <th style="width:80px;">S.No</th>
+                                              <th>CATEGORY</th>
+                                              <th>SUB CATEGORY</th>
+                                              <th>DATE</th>
+                                              <th>STATUS</th>
+                                                             
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <tr *ngFor="let category of getCategoryList let i=index;">
+                                              <td><strong>{{i+1}}</strong></td>
+                                              <td> {{category.name}} </td>
+                                              <td>
+                                                  <tr *ngFor="let subcategory of category.subcategories let j=index;">
+                                                   
+                                                    <td>{{subcategory.name}}</td>
+                                                  </tr>
+                                              </td>
+                                              <td>{{category.createdAt | date:'dd, MMMM ,yyyy'}}</td>
+                                            
+                                              <td>
+                                                  <div class="dropdown">
+                                                      <button type="button" class="btn btn-success light sharp" data-bs-toggle="dropdown">
+                                                          <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                      </button>
+                                                      <div class="dropdown-menu">
+                                                          <a class="dropdown-item" href="#">Edit</a>
+                                                          <a class="dropdown-item" href="#">Delete</a>
+                                                      </div>
+                                                  </div>
+                                              </td>
+                                          </tr>
+                                         
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                          <!-- /Recent Payments Queue -->	
+                      </div>
+                     
+                  </div>
+                   
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+  <!-- ADD CATEGORY POP MODEL   -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="sendMessageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addCategoryModal">Add Category</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="comment-form">
+            <form [formGroup]="categoryForm" (ngSubmit)="addCategory()">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="mb-3">
+                      <label class="text-black font-w600 form-label">Name <span class="required">*</span></label>
+                      <input type="text" class="form-control" formControlName="name" placeholder="name">
+                      <div *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched" class="text-danger">
+                        Name is required.
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label class="text-black font-w600 form-label">Description <span class="required">*</span></label>
+                      <textarea rows="8" class="form-control" formControlName="description" placeholder="description"></textarea>
+                      <div *ngIf="categoryForm.get('description')?.invalid && categoryForm.get('description')?.touched" class="text-danger">
+                        Description is required.
+                      </div>
+                    </div>
+                  </div>
+              
+                  <div class="col-lg-12">
+                    <div class="mb-3 mb-0">
+                      <button type="submit" class="btn btn-primary"data-bs-dismiss="modal" aria-label="Close" [disabled]="categoryForm.invalid">Add Category</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ADD Sub CATEGORY POP MODEL   -->
+<div class="modal fade" id="addSubCategoryModal" tabindex="-1" aria-labelledby="sendMessageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addSubCategoryModal">Add Sub Category</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="subCategoryForm" (ngSubmit)="addSubCategory()">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="mb-3">
+                      <label class="text-black font-w600 form-label">Category <span class="required">*</span></label><br>
+                      <!-- Bind the selected value to the categoryId control -->
+                      <p-dropdown formControlName="categoryId" [options]="getCategoryList" optionLabel="name" optionValue="_id" placeholder="Select a category"></p-dropdown>
+                      <div *ngIf="subCategoryForm.get('categoryId')?.invalid && subCategoryForm.get('categoryId')?.touched" class="text-danger">
+                        Category is required.
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label class="text-black font-w600 form-label">Name <span class="required">*</span></label>
+                      <input type="text" class="form-control" formControlName="name" placeholder="name">
+                      <div *ngIf="subCategoryForm.get('name')?.invalid && subCategoryForm.get('name')?.touched" class="text-danger">
+                        Name is required.
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label class="text-black font-w600 form-label">Description <span class="required">*</span></label>
+                      <textarea rows="8" class="form-control" formControlName="description" placeholder="description"></textarea>
+                      <div *ngIf="subCategoryForm.get('description')?.invalid && subCategoryForm.get('description')?.touched" class="text-danger">
+                        Description is required.
+                      </div>
+                    </div>
+                  </div>
+              
+                  <div class="col-lg-12">
+                    <div class="mb-3 mb-0">
+                      <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close" [disabled]="subCategoryForm.invalid">Add Sub Category</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              
+              
+        </div>
+      </div>
+    </div>
+  </div>

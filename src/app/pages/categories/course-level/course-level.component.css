@@ -1,0 +1,21 @@
+/* Add border to category cells */
+.table tbody tr td:nth-child(2) {
+    border: 1px solid #dddddd;
+    padding: 8px;
+}
+
+/* Add border to subcategory cells */
+.table tbody tr td:nth-child(3) {
+    border: 1px solid #dddddd;
+    padding: 8px;
+}
+
+.table tbody tr td:nth-child(4) {
+    border: 1px solid #dddddd;
+    padding: 8px;
+}
+
+.table tbody tr td:nth-child(5) {
+    border: 1px solid #dddddd;
+    padding: 8px;
+}
